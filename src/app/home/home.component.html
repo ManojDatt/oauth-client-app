@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<div class="card" *ngIf="isLoggedIn | async">
+  <div class="card-header">
+    {{today | date:'fullDate'}} {{today | date:'h:mm:ss a'}}  
+    <div class="float-right">
+      <button type="button" class="btn btn-outline-success" (click)="addTask()">Add Task</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Task Lists</h5>
+    <div class="p-4">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sr.</th>
+            <th scope="col">Task</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Complete</th>
+            <th scope="col">Created At</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of taskList; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{ task.task_name }}</td>
+            <td>{{ task.details }}</td>
+            <td>{{ task.username }}</td>
+            <td>{{ task.priority }}</td>
+            <td> <span *ngIf="task.complete">YES</span><span *ngIf="!task.complete">No</span></td>
+            <td>{{ task.created_at }}</td>
+            <td>
+              <div *ngIf="task.user  === userDetails.id">
+                <button type="button" class="btn btn-outline-info mr-1" (click)="updateTask(task)">Update</button>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteTask(task)">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="taskList.length === 0">
+            <td colspan="6" class="text-center">
+              <p>No Task available.</p>
+              <button type="button" class="btn btn-outline-success" (click)="addTask()">Add Task</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-popup [isLogin]="isLoggedIn | async" [popupTitle]="popupTitle" [taskDetail]="taskDetail" (popupEvent)="submitForm($event)"></app-popup>

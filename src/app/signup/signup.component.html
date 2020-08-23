@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="card" >
+  <div class="card-body">
+    <div class="container register-form">
+      <div class="form">
+          <div class="note">
+              <p>This is a simpleRegister Form made using Boostrap.</p>
+          </div>
+
+          <form class="form-content" [formGroup]="signupForm" (submit)="submitForm();">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text"  class="form-control" formControlName="username" placeholder="Username"/>
+                        <span class="input-line"></span><i *ngIf="signupForm.get('username').valid" class="zmdi zmdi-check-circle"></i>
+                        <ul *ngIf="signupForm.get('username').errors && (signupForm.get('username').touched || signupForm.get('username').dirty || isSubmit)" class="error_list">
+                            <li *ngIf="signupForm.get('username').errors.required">Please enter User Name</li>
+                            <li *ngIf="signupForm.get('username').errors.maxlength">Max 100 characters are allowed</li>
+                          </ul>
+                      </div>
+                      <div class="form-group">
+                        <input type="email" class="form-control" formControlName="email" placeholder="Email address"/>
+                        <span class="input-line"></span><i *ngIf="signupForm.get('email').valid" class="zmdi zmdi-check-circle"></i>
+                        <ul *ngIf="signupForm.get('email').errors && (signupForm.get('email').touched || signupForm.get('email').dirty || isSubmit)" class="error_list">
+                            <li *ngIf="signupForm.get('email').errors.required">Please enter User Name</li>
+                            <li *ngIf="signupForm.get('email').errors.maxlength">Max 150 characters are allowed</li>
+                            <li *ngIf="signupForm.get('email').errors.minlength">Minimim 10 characters are required</li>
+                            <li *ngIf="signupForm.get('email').errors.email">Please enter valid Email address</li>
+                            
+                        </ul>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="password" class="form-control" formControlName="password" placeholder="Password" />
+                        <span class="input-line"></span><i *ngIf="signupForm.get('password').valid" class="zmdi zmdi-check-circle"></i>
+                        <ul *ngIf="signupForm.get('password').errors && (signupForm.get('password').touched || signupForm.get('password').dirty || isSubmit)" class="error_list">
+                            <li *ngIf="signupForm.get('password').errors.required">Please enter Password</li>
+                            <li *ngIf="signupForm.get('password').errors.maxlength">Max 100 characters are allowed</li>
+                            <li *ngIf="signupForm.get('password').errors.matchPassword">Password doesn't match.</li> 
+                            <li *ngIf="signupForm.get('password').errors.minlength">Minimim 8 characters are required</li>                                                       
+                        </ul>
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" formControlName="confirm_password" type="text" placeholder="Confirm password"/>
+                        <span class="input-line"></span><i *ngIf="signupForm.get('confirm_password').valid" class="zmdi zmdi-check-circle"></i>
+                        <ul *ngIf="signupForm.get('confirm_password').errors && (signupForm.get('confirm_password').touched || signupForm.get('confirm_password').dirty || isSubmit)" class="error_list">
+                            <li *ngIf="signupForm.get('confirm_password').errors.required">Please enter Confirm Password</li>
+                            <li *ngIf="signupForm.get('confirm_password').errors.maxlength">Max 100 characters are allowed</li>
+                            <li *ngIf="signupForm.get('confirm_password').errors.matchPassword">Password doesn't match.</li>
+                            <li *ngIf="signupForm.get('confirm_password').errors.minlength">Minimim 8 characters are required</li>
+                        </ul>
+                      </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-info">Submit</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
